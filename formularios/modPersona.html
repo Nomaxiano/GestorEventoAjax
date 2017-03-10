@@ -1,0 +1,49 @@
+<form id="frmPersonaModificar" name="frmPersonaModificar" >
+        <label for="txtDNI">DNI</label>
+        <br/>
+        <input type="text" size="15" maxlength="50" name="txtDNI" placeholder="D.N.I" disabled="disabled"/>
+        <br/>
+        <label for="txtTipo">Tipo</label>
+        <br/>
+        <input type="radio" name="radios"  value="asistente" checked="checked" />Asistente
+        <input type="radio" name="radios"  value="contratante" />Contratante
+        <br/>
+        <label for="txtNombre">Nombre</label>
+        <br/>
+        <input type="textNombre" size="45" maxlength="50" name="txtNombre" placeholder="Nombre"/>
+        <br/>
+        <label for="txtApellidos">Apellidos</label>
+        <br/>
+        <input type="textApellidos" size="45" maxlength="50" name="txtApellidos" placeholder="Apellidos"/>
+        <br/>
+        <label for="txtTelefono">Telefono</label>
+        <br/>
+        <input type="textTelefono" size="45" maxlength="50" name="txtTelefono" placeholder="Telefono"/>
+        <br/>
+        <label for="txtCorreo">Correo Electrónico</label>
+        <br/>
+        <input type="txtCorreo" size="45" maxlength="50" name="txtCorreo" placeholder="Correo Electrónico"/>
+        <br/>
+</form>
+
+<script>
+    $("#divfrmModPersona").dialog({
+        autoOpen: true,
+        modal:true,
+        open:function() {
+            cargarDatosDialogo();
+        },
+        close: function () {
+            $("#frmPersonaModificar")[0].reset();
+        },
+        hide: "fold",
+        show: "fold",
+        height: "auto",
+        width: "auto",
+        resizable: false,
+        buttons: [{
+            text: "Aceptar",
+            click: procesoModPersona
+        }]
+    });
+</script>

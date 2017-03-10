@@ -1,0 +1,11 @@
+﻿body{
+    background-color: #2c4359;
+}
+
+.error{
+    background-color: yellow;
+}
+
+.ui-menu {
+    width: 200px;
+}

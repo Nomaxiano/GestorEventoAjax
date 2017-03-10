@@ -1,0 +1,84 @@
+<form id="frmEventosModificar" name="frmEventosModificar" role="form">
+    <label for="txtId">ID</label>
+    <br/>
+    <input type="text" size="15" maxlength="10" name="txtId" placeholder="Identificador" disabled="disabled"/>
+    <br/>
+    <label for="txtDescripcion">Descripcion</label>
+    <br/>
+    <input type="text" size="45" maxlength="60" name="txtDescripcion" placeholder="Descripción del Evento" disabled="disabled"/>
+    <br/>
+    <label for="txtFecha">Fecha</label>
+    <br/>
+    <input type="text" size="15"  id="txtFecha" name="txtFecha" placeholder="MM/DD/AAAA" readonly="readonly"/>
+    <br/>
+    <label for="lstModLugares">Lugares</label>
+    <br/>
+    <select name="lstModLugares" id="lstModLugares"></select>
+    <br/>
+    <label for="lstModContratantes">Contratante</label>
+    <br/>
+    <select name="lstModContratantes" id="lstModContratantes"></select>
+    <br/>
+    <label for="txtPrecio">Precio</label>
+    <br/>
+    <input type="text" size="15" maxlength="3" name="txtPrecio" placeholder="Precio por entrada"/>
+    <br/>
+</form>
+
+
+<script>
+    $("#divfrmModEvento").dialog({
+        autoOpen: true,  // Es el valor por defecto
+        modal: true,
+        open: function () {
+            cargarSelectListadoLugares();
+            cargarSelectListadoContratantes();
+            cargarDatosDialogoEvento();
+        },
+        close: function () {
+            $("#frmEventosModificar")[0].reset();
+        },
+        hide: "fold",
+        show: "fold",
+        height: "auto",
+        width: "auto",
+        resizable: false,
+        buttons: [{
+            text: "Aceptar",
+            click: procesoModEvento
+        }]
+    });
+
+    $(function () {
+        $('#txtFecha').datepicker({
+            monthNamesShort: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            dayNames:["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+            changeYear: true,
+            changeMonth: true
+        });
+    });
+
+    function cargarSelectListadoLugares(){
+        $.get('php/getLugares.php',null,cargarLugaresEvento,'json');
+    }
+    function cargarLugaresEvento(oArrayLugares, sStatus, oXHR){
+        $("#lstModLugares").empty();
+
+        $(oArrayLugares).each(function(){
+            $('<option>').val(this.ID_LUGAR).text(this.DESCRIPCION).appendTo("#lstModLugares");
+        });
+    }
+
+
+    function cargarSelectListadoContratantes(){
+        $.get('php/getContratantes.php',null,cargarContratantesEvento,'json');
+    }
+    function cargarContratantesEvento(oArrayContratantes, sStatus, oXHR){
+        $("#lstModContratantes").empty();
+
+        $(oArrayContratantes).each(function(){
+            $('<option>').val(this.DNI).text(this.NOMBRE+" "+this.APELLIDOS).appendTo("#lstModContratantes");
+        });
+    }
+</script>

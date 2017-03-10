@@ -1,0 +1,41 @@
+<form id="frmLugaresModificar" name="frmLugaresModificar" role="form">
+    <label for="txtId">ID</label>
+    <br/>
+    <input type="text" size="20" maxlength="19" name="txtId" placeholder="Identificador" disabled="disabled"/>
+    <br/>
+    <label for="txtDescripcion">Descripción</label>
+    <br/>
+    <input type="text" size="45" maxlength="60" name="txtDescripcion" placeholder="Breve descripción" disabled="disabled"/>
+    <br/>
+    <label for="txtDireccion">Dirección</label>
+    <br/>
+    <input type="text" size="45" maxlength="60" name="txtDireccion" placeholder="Localizacion del lugar"/>
+    <br/>
+    <label for="txtCapacidad">Capacidad</label>
+    <br/>
+    <input type="text" size="20" maxlength="7" name="txtCapacidad" placeholder="Cantidad de personas"/>
+    <br/>
+</form>
+
+
+<script>
+    $("#divfrmModLugar").dialog({
+        autoOpen: true,  // Es el valor por defecto
+        modal:true,
+        open:function() {
+            cargarDatosDialogoLugar();
+        },
+        close: function () {
+            $("#frmLugaresModificar")[0].reset();
+        },
+        hide: "fold",
+        show: "fold",
+        height: "auto",
+        width: "auto",
+        resizable: false,
+        buttons: [{
+            text: "Aceptar",
+            click: procesoModLugar
+        }]
+    });
+</script>
